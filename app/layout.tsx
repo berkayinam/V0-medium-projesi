@@ -1,21 +1,33 @@
-import "@/app/globals.css"
+import type React from "react"
+import type { Metadata } from "next"
 import { Inter } from "next/font/google"
+import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import Navbar from "@/components/navbar"
+import Footer from "@/components/footer"
 
 const inter = Inter({ subsets: ["latin"] })
 
-export const metadata = {
-  title: "AwesomeUI - Modern Web Çözümleri",
-  description: "Etkileyici, hızlı ve kullanıcı dostu web siteleri ile işletmenizi bir üst seviyeye taşıyın.",
+export const metadata: Metadata = {
+  title: "DertOps - Cloud, DevOps & IoT Solutions",
+  description: "Professional Cloud, DevOps, and IoT solutions for modern businesses",
     generator: 'v0.dev'
 }
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
   return (
     <html lang="tr" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <div className="flex min-h-screen flex-col">
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
         </ThemeProvider>
       </body>
     </html>
